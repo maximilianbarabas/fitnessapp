@@ -1,3 +1,4 @@
+import 'package:fittness_app/video_info.dart';
 import 'package:flutter/material.dart';
 import 'home_page.dart';
 
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: VideoInfo(),
     );
   }
 }
