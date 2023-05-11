@@ -1,6 +1,6 @@
+import 'package:fittness_app/home_page.dart';
 import 'package:fittness_app/video_info.dart';
 import 'package:flutter/material.dart';
-import 'home_page.dart';
 import 'package:get/get.dart';
 
 void main() {
