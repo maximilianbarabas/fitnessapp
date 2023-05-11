@@ -1,6 +1,7 @@
+import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:get/get.dart';
 import "colors.dart" as color;
 
 class VideoInfo extends StatefulWidget {
@@ -11,6 +12,21 @@ class VideoInfo extends StatefulWidget {
 }
 
 class _VideoInfoState extends State<VideoInfo> {
+  List info = [];
+  _initData() {
+    DefaultAssetBundle.of(context)
+        .loadString("json/videoinfo.json")
+        .then((value) {
+      info = json.decode(value);
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _initData();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,9 +52,14 @@ class _VideoInfoState extends State<VideoInfo> {
                       children: [
                         Row(
                           children: [
-                            Icon(Icons.arrow_back_ios,
-                                size: 20,
-                                color: color.AppColor.secondPageIconColor),
+                            InkWell(
+                              onTap: () {
+                                Get.back();
+                              },
+                              child: Icon(Icons.arrow_back_ios,
+                                  size: 20,
+                                  color: color.AppColor.secondPageIconColor),
+                            ),
                             Expanded(child: Container()),
                             Icon(Icons.info_outline,
                                 size: 20,
@@ -143,7 +164,51 @@ class _VideoInfoState extends State<VideoInfo> {
                           width: 20,
                         ),
                       ],
-                    ))
+                    )),
+                Expanded(
+                  child: Container(
+                      decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius:
+                              BorderRadius.only(topRight: Radius.circular(70))),
+                      child: Column(children: [
+                        SizedBox(
+                          height: 30,
+                        ),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: 30,
+                            ),
+                            Text(
+                              "Első torna 1.",
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                  color: color.AppColor.circuitsColor),
+                            ),
+                            Expanded(child: Container()),
+                            Row(
+                              children: [
+                                Icon(Icons.loop,
+                                    size: 30, color: color.AppColor.loopColor),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Text("3x gyakorlás",
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: color.AppColor.setsColor,
+                                    )),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                              ],
+                            )
+                          ],
+                        )
+                      ])),
+                ),
               ],
             )));
   }
